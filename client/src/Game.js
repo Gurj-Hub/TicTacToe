@@ -1,11 +1,35 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { PlayerContext } from "./PlayerContext";
+import { useEffect } from "react";
 
 const Game = () => {
+  const { setPlayerTurn, playerTurn, playerSymbol1, playerSymbol2, gameArray } =
+    useContext(PlayerContext);
+
+  const HandleChangePlayerTurn = () => {
+    setPlayerTurn(!playerTurn);
+  };
+
+  const HandleAddSymbol = (box) => {
+    box.innerText = playerTurn === true ? playerSymbol1 : playerSymbol2;
+  };
+
   return (
     <Container>
-      {" "}
-      This is where the game/the grid/the symbols/game logic will be coded!{" "}
+      {gameArray.map((element, index) => {
+        return (
+          <Box
+            id={index}
+            key={index}
+            onClick={() => {
+              HandleAddSymbol(document.getElementById(index));
+              HandleChangePlayerTurn();
+            }}
+          ></Box>
+        );
+      })}
+      {console.log(gameArray)}
     </Container>
   );
 };
@@ -13,7 +37,19 @@ const Game = () => {
 export default Game;
 
 const Container = styled.div`
-  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 800px;
   width: 800px;
-  border: 2px solid green;
+`;
+
+const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: calc(100% / 3);
+  width: calc(100% / 3);
+  border: 2px solid black;
+  font-size: 60px;
 `;

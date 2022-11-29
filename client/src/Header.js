@@ -5,8 +5,12 @@ import { PlayerContext } from "./PlayerContext";
 const Header = () => {
   const { playerTurn, setPlayerTurn } = useContext(PlayerContext);
   const [header, setHeader] = useState(
-    playerTurn === 1 ? "It is player 1's turn!" : "It is player 2's turn!"
+    playerTurn === true ? "It is player 1's turn!" : "It is player 2's turn!"
   );
+
+  //   if (header === "start") {
+  //     return <Div> The game will start shortly </Div>
+  //   }
   return <Div> {header} </Div>;
 };
 
