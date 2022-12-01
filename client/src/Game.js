@@ -4,17 +4,26 @@ import { PlayerContext } from "./PlayerContext";
 import { useEffect } from "react";
 
 const Game = () => {
-  const { setPlayerTurn, playerTurn, playerSymbol1, playerSymbol2, gameArray } =
-    useContext(PlayerContext);
+  const {
+    setPlayerTurn,
+    playerTurn,
+    playerSymbol1,
+    playerSymbol2,
+    gameArray,
+    counter,
+    setCounter,
+  } = useContext(PlayerContext);
 
   const HandleChangePlayerTurn = () => {
     setPlayerTurn(!playerTurn);
+    setCounter(counter + 1);
   };
 
   const HandleAddSymbol = (box) => {
     box.innerText = playerTurn === true ? playerSymbol1 : playerSymbol2;
   };
 
+  console.log(counter);
   return (
     <Container>
       {gameArray.map((element, index) => {
@@ -29,7 +38,6 @@ const Game = () => {
           ></Box>
         );
       })}
-      {console.log(gameArray)}
     </Container>
   );
 };

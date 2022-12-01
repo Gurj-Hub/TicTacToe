@@ -7,6 +7,7 @@ export const PlayerProvider = ({ children }) => {
   const playerSymbol1 = "X";
   const playerSymbol2 = "O";
   const gameArray = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const [counter, setCounter] = useState(0);
 
   return (
     <PlayerContext.Provider
@@ -16,6 +17,8 @@ export const PlayerProvider = ({ children }) => {
         playerSymbol1,
         playerSymbol2,
         gameArray,
+        counter,
+        setCounter,
       }}
     >
       {children}

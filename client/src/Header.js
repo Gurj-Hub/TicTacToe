@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { PlayerContext } from "./PlayerContext";
 
 const Header = () => {
-  const { playerTurn, setPlayerTurn } = useContext(PlayerContext);
+  const { playerTurn, setPlayerTurn, counter } = useContext(PlayerContext);
   const [header, setHeader] = useState(
     playerTurn === true ? "It is player 1's turn!" : "It is player 2's turn!"
   );
@@ -11,7 +11,7 @@ const Header = () => {
   //   if (header === "start") {
   //     return <Div> The game will start shortly </Div>
   //   }
-  return <Div> {header} </Div>;
+  return <Div> {counter === 9 ? "The game is over!" : header} </Div>;
 };
 
 export default Header;
