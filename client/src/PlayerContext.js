@@ -8,6 +8,7 @@ export const PlayerProvider = ({ children }) => {
   const playerSymbol2 = "O";
   const gameArray = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   const [counter, setCounter] = useState(0);
+  const [header, setHeader] = useState("It is player 1's turn!");
 
   return (
     <PlayerContext.Provider
@@ -19,6 +20,8 @@ export const PlayerProvider = ({ children }) => {
         gameArray,
         counter,
         setCounter,
+        header,
+        setHeader,
       }}
     >
       {children}

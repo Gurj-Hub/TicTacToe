@@ -12,18 +12,62 @@ const Game = () => {
     gameArray,
     counter,
     setCounter,
+    setHeader,
+    header,
   } = useContext(PlayerContext);
 
-  const HandleChangePlayerTurn = () => {
-    setPlayerTurn(!playerTurn);
-    setCounter(counter + 1);
+  //   [1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+  const winCondition = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [6, 4, 2],
+  ];
+
+  winCondition.forEach((condition) => {
+    // console.log(condition);
+    condition.map((index) => {
+      //   console.log(index);
+      if (gameArray.indexOf(playerSymbol1) === index) {
+        console.log("yes, it happened");
+      }
+    });
+  });
+
+  const handleGameEndings = () => {
+    // if (
+    //   winCondition.forEach((condition) => {
+    //     condition.every((index) => {
+    //       return gameArray.indexOf(playerSymbol1) === index;
+    //     });
+    //   })
+    // ) {
+    //   console.log("its working!");
+    // } else if (counter === 9) {
+    //   setHeader("over");
+    // }
   };
 
-  const HandleAddSymbol = (box) => {
-    box.innerText = playerTurn === true ? playerSymbol1 : playerSymbol2;
+  const AddSymbolAndChangePlayerTurn = (box) => {
+    // console.log(box.innerText);
+    // console.log(gameArray);
+    if (box.innerText === "") {
+      box.innerText = playerTurn === true ? playerSymbol1 : playerSymbol2;
+      setCounter(counter + 1);
+      handleGameEndings();
+      setPlayerTurn(!playerTurn);
+
+      if (counter + 1 === 9) {
+        setHeader("over");
+      }
+    }
   };
 
-  console.log(counter);
   return (
     <Container>
       {gameArray.map((element, index) => {
@@ -32,8 +76,7 @@ const Game = () => {
             id={index}
             key={index}
             onClick={() => {
-              HandleAddSymbol(document.getElementById(index));
-              HandleChangePlayerTurn();
+              AddSymbolAndChangePlayerTurn(document.getElementById(index));
             }}
           ></Box>
         );
