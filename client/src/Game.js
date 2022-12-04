@@ -16,8 +16,6 @@ const Game = () => {
     header,
   } = useContext(PlayerContext);
 
-  //   [1, 1, 1, 1, 1, 1, 1, 1, 1]
-
   const winCondition = [
     [0, 1, 2],
     [3, 4, 5],
@@ -29,42 +27,35 @@ const Game = () => {
     [6, 4, 2],
   ];
 
-  winCondition.forEach((condition) => {
-    // console.log(condition);
-    condition.map((index) => {
-      //   console.log(index);
-      if (gameArray.indexOf(playerSymbol1) === index) {
-        console.log("yes, it happened");
-      }
-    });
-  });
-
   const handleGameEndings = () => {
-    // if (
-    //   winCondition.forEach((condition) => {
-    //     condition.every((index) => {
-    //       return gameArray.indexOf(playerSymbol1) === index;
-    //     });
-    //   })
-    // ) {
-    //   console.log("its working!");
-    // } else if (counter === 9) {
-    //   setHeader("over");
-    // }
+    if (
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2]) ||
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2]) ||
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2]) ||
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2]) ||
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2]) ||
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2]) ||
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2]) ||
+      (gameArray[0] === gameArray[1] && gameArray[1] === gameArray[2])
+    ) {
+      setHeader(
+        playerTurn === true ? "Winner is player 1 !" : "Winner is player 1 !"
+      );
+    }
   };
 
-  const AddSymbolAndChangePlayerTurn = (box) => {
-    // console.log(box.innerText);
-    // console.log(gameArray);
+  const addSymbolAndChangePlayerTurn = (box) => {
+    console.log(gameArray[box.id]);
+
     if (box.innerText === "") {
       box.innerText = playerTurn === true ? playerSymbol1 : playerSymbol2;
+      gameArray[box.id] = playerTurn === true ? playerSymbol1 : playerSymbol2;
       setCounter(counter + 1);
       handleGameEndings();
       setPlayerTurn(!playerTurn);
-
-      if (counter + 1 === 9) {
-        setHeader("over");
-      }
+    }
+    if (counter + 1 === 9) {
+      setHeader("over");
     }
   };
 
@@ -76,7 +67,7 @@ const Game = () => {
             id={index}
             key={index}
             onClick={() => {
-              AddSymbolAndChangePlayerTurn(document.getElementById(index));
+              addSymbolAndChangePlayerTurn(document.getElementById(index));
             }}
           ></Box>
         );

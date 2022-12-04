@@ -7,11 +7,11 @@ const Header = () => {
     useContext(PlayerContext);
 
   if (header === "over") {
-    return <Div> "The game is over!" </Div>;
+    return <Div> The game is over ! </Div>;
   } else if (header !== "over" && playerTurn === true) {
-    return <Div> "It is player 1's turn!" </Div>;
+    return <Div> Player 1 </Div>;
   } else if (header !== "over" && playerTurn === false) {
-    return <Div> "It is player 2's turn!" </Div>;
+    return <Div> Player 2 </Div>;
   }
 };
 
